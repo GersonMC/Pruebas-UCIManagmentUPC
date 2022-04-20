@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+
+
+	<ui:define name="content">
+		<h2>Lista de pacientes</h2>
+		<h:form>
+			<p:dataTable id="LstPaciente"
+				value="#{pacienteController.listaPaciente}" var="pe"
+				paginator="true" paginatorPosition="top"
+				rowsPerPageTemplate="5,10,15,20,25" rows="5" rowIndexVar="item"
+				emptyMessage="no existen personas registradas">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{pe.idPaciente}" />
+				</p:column>
+
+				<p:column headerText="Persona">
+					<h:outputText value="#{pe.fullnamePaciente}" />
+				</p:column>
+
+				<p:column headerText="Fecha de nacimiento">
+					<h:outputText value="#{pe.fechaNacimiento}">
+						<f:convertDateTime pattern="dd-MM-yyyy" timeZone="UTC" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Correo">
+					<h:outputText value="#{pe.correoPaciente}" />
+				</p:column>
+
+				<p:column headerText="Dirección">
+					<h:outputText value="#{pe.direccionPaciente}" />
+				</p:column>
+
+				<p:column headerText="Celular">
+					<h:outputText value="#{pe.numCelularPaciente}" />
+				</p:column>
+				
+				<p:column headerText="Operación">
+					<h:commandLink action="listPerson" value="Eliminar"
+						actionListener="#{pacienteController.delete(pe)}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+
+
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>
+</html>
