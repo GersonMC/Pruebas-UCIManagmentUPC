@@ -8,20 +8,20 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import pe.edu.upc.daointerfaces.IPacienteDao;
-import pe.edu.upc.entities.Paciente;
+import pe.edu.upc.daointerfaces.AdminDao;
+import pe.edu.upc.entities.Admin;
 
-public class AdminImpl implements IPacienteDao {
+
+public class AdminImpl implements AdminDao {
 	@PersistenceContext(unitName = "demofi19")
 	private EntityManager em;
-
 	@Transactional
 	@Override
-	public void insert(Paciente p) {
+	public void insert(Admin a) {
 		try {
-			em.persist(p);
+			em.persist(a);
 		} catch (Exception e) {
-			System.out.println("Errorrrr al listar paciente en DAO");
+			System.out.println("Error al listar el administrador");
 
 		}
 
@@ -29,27 +29,27 @@ public class AdminImpl implements IPacienteDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Paciente> list() {
-		List<Paciente> listaPacientes = new ArrayList<Paciente>();
+	public List<Admin> list() {
+		List<Admin> listaAdmin = new ArrayList<Admin>();
 
 		try {
-			Query jpql = em.createQuery("from Paciente p");
-			listaPacientes = (List<Paciente>) jpql.getResultList();
+			Query jpql = em.createQuery("from Admin a");
+			listaAdmin = (List<Admin>) jpql.getResultList();
 
 		} catch (Exception e) {
 			System.out.println("Error al listar paciente en DAO");
 		}
 
-		return listaPacientes;
+		return listaAdmin;
 	}
 
 	@Transactional
 	@Override
 	public void delete(int id) {
 		try {
-			Paciente pac = em.find(Paciente.class, id);
+			Admin ad = em.find(Admin.class, id);
 
-			em.remove(pac);
+			em.remove(ad);
 		} catch (Exception e) {
 			System.out.println("Error al eliminar en el DAO");
 		}
