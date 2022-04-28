@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Registro de pacientes</h2>
+		<h:form>
+
+
+
+			<h:outputLabel value="Id: " for="id" styleClass="control-Label" />
+			<p:inputText id="id" styleClass="form-control"
+				value="#{pacienteController.p.idPaciente}"></p:inputText>
+
+			<h:outputLabel value="Nombre: " for="nombre"
+				styleClass="control-Label" />
+			<p:inputText id="nombre" styleClass="form-control"
+				value="#{pacienteController.p.fullnamePaciente}"></p:inputText>
+
+			<h:outputLabel value="Fecha de nacimiento:" for="fecha"
+				styleClass="control-Label" />
+			<p:calendar id="fecha" pattern="dd/MM/yyyy"
+				value="#{pacienteController.p.fechaNacimiento}" showOn="button"
+				timZone="America/Mexico_City"></p:calendar>
+			<br />
+			<h:outputLabel value="Correo:" for="correo" styleClass="control-Label" />
+			<p:inputText id="correo" styleClass="form-control"
+				value="#{pacienteController.p.correoPaciente}"></p:inputText>
+
+			<h:outputLabel value="Dirección:" for="direccion"
+				styleClass="control-Label" />
+			<p:inputText id="direccion" styleClass="form-control"
+				value="#{pacienteController.p.direccionPaciente}"></p:inputText>
+			<h:outputLabel value="Celular:" for="celular"
+				styleClass="control-Label" />
+			<p:inputText id="celular" styleClass="form-control"
+				value="#{pacienteController.p.numCelularPaciente}"></p:inputText>
+
+
+
+
+			<p:commandButton value="Registrar"
+				actionListener="#{pacienteController.insert()}"
+				action="listPerson?faces-redirect=true" update="@form"></p:commandButton>
+
+		</h:form>
+
+	</ui:define>
+
+
+
+
+
+
+</ui:composition>
+</html>
