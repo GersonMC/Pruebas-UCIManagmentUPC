@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Modificacion de Estado de reserva</h2>
+		<h:form>
+
+			<h:outputLabel value="Codigo de Estado de reserva" for="id"
+				styleClass="control-label" />
+			<p:inputText id="id" styleClass="form-control"
+				value="#{estadoReservaController.es.idEstadoReserva}" />
+
+			<h:outputLabel value="Estado" for="cboEstado"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboEstado"
+				value="#{estadoReservaController.es.estado}">
+				<f:selectItem itemLabel="Aceptado" itemValue="Aceptado" />
+				<f:selectItem itemLabel="En espera" itemValue="En espera" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<h:outputLabel value="Reserva" for="cboEstado"
+				styleClass="control-label" />
+			<p:selectOneButton id="cboEstado"
+				value="#{estadoReservaController.es.reserva}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{estadoReservaController.listaReservas}"
+					var="re" itemLabel="#{re.idReserva}" itemValue="#{re}" />
+			</p:selectOneButton>
+
+			<br />
+
+			<p:commandButton value="Actualizar"
+				actionListener="#{estadoReservaController.update()}"
+				action="listEstadoReserva?faces-redirect=true" update="@form"
+				styleClass="btn btn-primary" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

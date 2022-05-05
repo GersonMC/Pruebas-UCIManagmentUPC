@@ -1,6 +1,7 @@
 package pe.edu.upc.entities;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,27 +11,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Paciente")
-public class Paciente{
+@Table(name = "Paciente")
+public class Paciente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idPaciente;
-	
-	
-	@Column(name = "fullnamePaciente",nullable=false,length=47)
+
+	@Column(name = "fullnamePaciente", nullable = false, length = 47)
 	private String fullnamePaciente;
 
-	@Column(name = "fechaNacimiento",nullable=false)
+	@Column(name = "fechaNacimiento", nullable = false)
 	private Date fechaNacimiento;
-	
-	@Column(name = "correoPaciente",nullable=false,length=47)
+
+	@Column(name = "correoPaciente", nullable = false, length = 47)
 	private String correoPaciente;
-	
-	@Column(name = "direccionPaciente",nullable=false,length=47)
+
+	@Column(name = "direccionPaciente", nullable = false, length = 47)
 	private String direccionPaciente;
-	
-	@Column(name = "numCelularPaciente",nullable=false,length=47)
+
+	@Column(name = "numCelularPaciente", nullable = false, length = 47)
 	private String numCelularPaciente;
 
 	public Paciente() {
@@ -95,6 +95,23 @@ public class Paciente{
 
 	public void setNumCelularPaciente(String numCelularPaciente) {
 		this.numCelularPaciente = numCelularPaciente;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPaciente);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Paciente other = (Paciente) obj;
+		return idPaciente == other.idPaciente;
 	}
 
 }

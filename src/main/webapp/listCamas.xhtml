@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Lista de Camas</h2>
+		<h:form>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<h:outputLabel value="Ingrese la disponibilidad de  Cama a buscar:"
+							for="name" styleClass="control-label" />
+						<p:inputText id="name"
+							value="#{camaController.ca.disponibilidadCama}"
+							styleClass="form-control" />
+						<p:commandButton value="Buscar" update="lstCamas"
+							actionListener="#{camaController.findByNameCama()}" />
+
+					</div>
+				</div>
+			</div>
+
+			<p:dataTable id="lstCamas" var="ca"
+				value="#{camaController.listaCamas}" paginator="true"
+				paginatorPosition="top" rowsPerPageTemplate="5,10" rows="6"
+				emptyMessage="No existen registros de camas" rowIndexVar="item">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{ca.idCama}" />
+				</p:column>
+
+				<p:column headerText="Hospital">
+					<h:outputText value="#{ca.hospital.nombreHospital}" />
+				</p:column>
+
+				<p:column headerText="Administrador">
+					<h:outputText value="#{ca.administrador.userAdmin}" />
+				</p:column>
+
+				<p:column headerText="Piso de Cama">
+					<h:outputText value="#{ca.pisoCama}" />
+				</p:column>
+
+				<p:column headerText="Disponibilidad">
+					<h:outputText value="#{ca.disponibilidadCama}" />
+				</p:column>
+
+				<p:column headerText="Operación">
+					<h:commandLink action="listCamas" value="Eliminar"
+						actionListener="#{camaController.delete(ca)}" />
+				</p:column>
+
+				<p:column headerText="Operacion">
+					<h:commandLink action="#{camaController.preUpdate(ca)}"
+						value="Modificar" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -5,26 +5,50 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 	<link rel="shortcut icon" type="image/x-icon"
-		href="resources/img/loguito.png" />
-
+		href="resources/img/logo.jpg" />
 </h:head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light"> <a
-		class="navbar-brand" href="#">UCIManagement UPC</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <a
+		class="navbar-brand" href="#">UPC</a>
 
 	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
+		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="panel.xhtml">Inicio<span class="sr-only">(current)</span>
+				href="panel.xhtml">Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="persona.xhtml">Registro
+
+			<!-- VISTAS-->
+			<li class="nav-item"><a class="nav-link" href="hospital.xhtml">Registro
+					de hospital</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="administrador.xhtml">Registro de Administrador</a></li>
+			<li class="nav-item"><a class="nav-link" href="cama.xhtml">Registro
+					de Cama</a></li>
+			<li class="nav-item"><a class="nav-link" href="medico.xhtml">Registro
+					de Médico</a></li>
+			<li class="nav-item"><a class="nav-link" href="paciente.xhtml">Registro
 					de Paciente</a></li>
-			<li class="nav-item"><a class="nav-link" href="listPerson.xhtml">Lista
-					de Paciente</a></li>
+			<li class="nav-item"><a class="nav-link" href="reserva.xhtml">Realizar
+					una reserva</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="estadoReserva.xhtml">Consultar estado de reserva</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listHospitales.xhtml">Lista de Hospitales</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listAdministradores.xhtml">Lista de Administradores</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listMedicos.xhtml">Lista de Médico</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listPaciente.xhtml">Lista de Paciente</a></li>
+			<li class="nav-item"><a class="nav-link" href="listCamas.xhtml">Lista
+					de Camas</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listReservas.xhtml"> Lista de reservas</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="listEstadoReserva.xhtml"> Lista de Estado de reservas</a></li>
 		</ul>
 	</div>
 	</nav>
@@ -33,9 +57,6 @@
 	</div>
 	<div>
 		<ui:insert name="footerCont"></ui:insert>
-		<button type="button" class="btn btn-primary">Registrar</button>
 	</div>
-
-
 </body>
 </html>

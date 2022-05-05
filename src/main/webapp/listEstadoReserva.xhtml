@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Lista de Estado de reservas</h2>
+		<h:form>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<h:outputLabel value="Ingrese el ID de Estado de Reserva a buscar"
+							for="name" styleClass="control-label" />
+						<p:inputText id="name"
+							value="#{estadoReservaController.es.idEstadoReserva}"
+							styleClass="form-control" />
+						<p:commandButton value="Buscar" update="lstEstadoReserva"
+							actionListener="#{estadoReservaController.findByNameEstadoReserva()}" />
+					</div>
+				</div>
+			</div>
+
+			<p:dataTable id="lstEstadoReserva" var="ess"
+				value="#{estadoReservaController.listaEstadoReservas}"
+				paginator="true" paginatorPosition="top" owsPerPageTemplate="5,10"
+				rows="6" emptyMessage="No existen registros de Estado de reservas"
+				rowIndexVar="item">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{ess.idEstadoReserva}" />
+				</p:column>
+				
+				<p:column headerText="IDReserva">
+					<h:outputText value="#{ess.idEstadoReserva}" />
+				</p:column>
+				
+				<p:column headerText="Estado">
+					<h:outputText value="#{ess.estado}" />
+				</p:column>
+				
+				<p:column headerText="Operación">
+					<h:commandLink action="lstEstadoReserva" value="Eliminar"
+						actionListener="#{estadoReservaController.delete(ess)}" />
+				</p:column>
+				
+				<p:column headerText="Operacion">
+					<h:commandLink action="#{estadoReservaController.preUpdate(ess)}"
+						value="Modificar" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

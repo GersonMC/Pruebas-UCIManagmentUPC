@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Registro de Cama</h2>
+		<h:form>
+
+			<h:outputLabel value="Codigo de Cama" for="id"
+				styleClass="control-label" />
+			<p:inputText id="id" styleClass="form-control"
+				value="#{camaController.ca.idCama}" required="true" />
+
+			<h:outputLabel value="Hospital" for="cboHospital"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboHospital"
+				value="#{camaController.ca.hospital}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{camaController.listaHospitales}" var="h"
+					itemLabel="#{h.nombreHospital}" itemValue="#{h}" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<h:outputLabel value="Administrador" for="cboAdministrador"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboAdministrador"
+				value="#{camaController.ca.administrador}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{camaController.listaAdministradores}"
+					var="a" itemLabel="#{a.userAdmin}" itemValue="#{a}" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<h:outputLabel value="Piso de Cama" for="cboPiso"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboPiso" value="#{camaController.ca.pisoCama}">
+				<f:selectItem itemLabel="Piso 1" itemValue="1" />
+				<f:selectItem itemLabel="Piso 2" itemValue="2" />
+				<f:selectItem itemLabel="Piso 3" itemValue="3" />
+				<f:selectItem itemLabel="Piso 4" itemValue="4" />
+				<f:selectItem itemLabel="Piso 5" itemValue="5" />
+				<f:selectItem itemLabel="Piso 6" itemValue="6" />
+				<f:selectItem itemLabel="Piso 7" itemValue="7" />
+				<f:selectItem itemLabel="Piso 8" itemValue="8" />
+				<f:selectItem itemLabel="Piso 9" itemValue="9" />
+				<f:selectItem itemLabel="Piso 10" itemValue="10" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<h:outputLabel value="Disponibilidad de Cama" for="cboDisponibilidad"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboDisponibilidad"
+				value="#{camaController.ca.disponibilidadCama}">
+				<f:selectItem itemLabel="Disponible" itemValue="Disponible" />
+				<f:selectItem itemLabel="Ocupado" itemValue="Ocupado" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<p:commandButton value="Registrar"
+				actionListener="#{camaController.insert()}"
+				action="listCamas?faces-redirect=true" update="@form"
+				styleClass="btn btn-primary" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

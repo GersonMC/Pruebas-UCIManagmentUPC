@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h3>Lista de Reservas</h3>
+		<div class="row">
+
+			<div class="col-sm-4">
+
+				<div class="form-group">
+
+					<h:outputLabel
+						value="Ingrese el nombre del paciente para buscar su reserva:"
+						for="name" styleClass="control-label" />
+					<p:inputText id="name" value="#{reservaController.r.paciente}"
+						styleClass="form-control" />
+					<p:commandButton value="Busqueda" update="listareservas"
+						actionListener="#{reservaController.FBPaciente()}" />
+				</div>
+			</div>
+		</div>
+
+		<p:dataTable id="listareservas" var="RE"
+			value="#{reservaController.listaReservas}" paginator="true"
+			paginatorPosition="top" rowsPerPageTemplate="5,10" rows="10"
+			emptyMessage="No se solicito ninguna reserva" rowIndexVar="item">
+
+			<p:column headerText="IDReserva">
+				<h:outputText value="#{RE.idReserva}" />
+			</p:column>
+
+			<p:column headerText="Pacientes">
+				<h:outputText value="#{RE.paciente.fullnamePaciente}" />
+			</p:column>
+
+			<p:column headerText="Hospitales">
+				<h:outputText value="#{RE.hospital.nombreHospital}" />
+			</p:column>
+
+
+			<p:column headerText="Fecha de Reserva">
+				<h:outputText value="#{RE.fechaReserva}">
+					<f:convertDateTime pattern="dd-MM-yyyy" timeZone="UTC" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Operación">
+				<h:commandLink action="listReservas" value="Cancelar Reserva"
+					actionListener="#{reservaController.delete(RE)}" />
+			</p:column>
+
+			<p:column headerText="Operación">
+				<h:commandLink action="#{reservaController.preUpdate(RE)}"
+					value="Modificar" />
+			</p:column>
+
+
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>

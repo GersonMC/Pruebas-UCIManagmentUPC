@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+
+	<ui:define name="content">
+
+		<h2>Lista de Administradores</h2>
+		<h:form>
+
+			<div class="row">
+
+				<div class="col-sm-4">
+
+					<div class="form-group">
+
+						<h:outputLabel
+							value="Ingrese el nombre del Administrador a buscar:" for="name"
+							styleClass="control-label" />
+						<p:inputText id="name"
+							value="#{administradorController.a.userAdmin}"
+							styleClass="form-control" />
+						<p:commandButton value="Buscar" update="lstAdministradores"
+							actionListener="#{administradorController.findByNameAdministrador()}" />
+
+					</div>
+				</div>
+			</div>
+
+			<p:dataTable id="lstAdministradores" var="ad"
+				value="#{administradorController.listaAdministradores}"
+				paginator="true" paginatorPosition="top" rowsPerPageTemplate="5,10"
+				rows="4" emptyMessage="No existen registros de administradores"
+				rowsIndexVar="item">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{ad.idAdministrador}" />
+				</p:column>
+
+				<p:column headerText="UserAdmin">
+					<h:outputText value="#{ad.userAdmin}" />
+				</p:column>
+
+				<p:column headerText="UserPassword">
+					<h:outputText value="#{ad.userPassword}" />
+				</p:column>
+
+				<p:column headerText="Operación">
+					<h:commandLink action="listAdministrador" value="Eliminar"
+						actionListener="#{administradorController.delete(ad)}" />
+				</p:column>
+
+				<p:column headerText="Modificar">
+					<h:commandLink action="#{administradorController.preUpdate(ad)}"
+						value="Modificar" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

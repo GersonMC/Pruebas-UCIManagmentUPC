@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+	<ui:define name="content">
+		<h2>Modificacion de hospital</h2>
+		<h:form>
+
+		<h:outputLabel value="Id" for="id" styleClass="control-label" />
+			<p:inputText id="id" styleClass="form-control"
+				value="#{hospitalController.h.idHospital}"></p:inputText>
+
+			<h:outputLabel value="Nombre" for="nombre" styleClass="control-label" />
+			<p:inputText id="nombre" styleClass="form-control"
+				value="#{hospitalController.h.nombreHospital}"></p:inputText>
+
+			<h:outputLabel value="Direccion" for="direccion"
+				styleClass="control-label" />
+			<p:inputText id="direccion" styleClass="form-control"
+				value="#{hospitalController.h.direccionHospital}"></p:inputText>
+
+			<br />
+
+			<h:outputLabel value="Medico" for="cboMedico"
+				styleClass="control-label" />
+			<p:selectOneMenu id="cboMedico"
+				value="#{hospitalController.h.medico}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{hospitalController.listaMedicos}" var="a"
+					itemLabel="#{a.fullnameMedico}" itemValue="#{a}" />
+			</p:selectOneMenu>
+
+			<br />
+
+			<p:commandButton value="Actualizar"
+				actionListener="#{hospitalController.update()}"
+				action="listHospitales?faces-redirect=true" update="@form"></p:commandButton>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

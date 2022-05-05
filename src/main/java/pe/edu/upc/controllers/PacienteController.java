@@ -14,21 +14,20 @@ import pe.edu.upc.serviceinterfaces.IPacienteService;
 @Named
 @RequestScoped
 public class PacienteController {
+
 	@Inject
 	private IPacienteService pService;
 
-	// los atributos
 	private Paciente p;
 	private List<Paciente> listaPaciente;
-
-	// inicializamos
+	
 	@PostConstruct
 	public void init() {
 		this.listaPaciente = new ArrayList<Paciente>();
 		this.p = new Paciente();
 		this.list();
 	}
-
+	
 	public String newPaciente() {
 		this.setP(new Paciente());
 		return "paciente.xhtml";
@@ -42,7 +41,7 @@ public class PacienteController {
 		}
 
 	}
-
+	
 	public void list() {
 		try {
 			listaPaciente = pService.list();
@@ -51,7 +50,7 @@ public class PacienteController {
 		}
 
 	}
-
+	
 	public void delete(Paciente pa) {
 		try {
 			pService.delete(pa.getIdPaciente());
@@ -61,8 +60,32 @@ public class PacienteController {
 		}
 
 	}
+	
+	public void findByName() {
 
-	// Los geterr y setters
+		try {
+			listaPaciente = pService.findByName(this.getP());
+		} catch (Exception e) {
+			System.out.println("Error al buscar en el controller");
+		}
+	}
+
+	/// Modificar
+	public String preUpdate(Paciente pa) {
+
+		this.setP(pa);
+		return "modificacionPaciente.xhtml";
+
+	}
+
+	public void update() {
+		try {
+			pService.update(this.p);
+		} catch (Exception e) {
+			System.out.println("Error al modificar en el controller");
+		}
+	}
+
 	public Paciente getP() {
 		return p;
 	}
@@ -78,5 +101,6 @@ public class PacienteController {
 	public void setListaPaciente(List<Paciente> listaPaciente) {
 		this.listaPaciente = listaPaciente;
 	}
-
+	
+	
 }

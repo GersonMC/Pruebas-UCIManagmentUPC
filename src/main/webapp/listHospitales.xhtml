@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="master.xhtml">
+
+	<ui:define name="content">
+
+		<h2>Lista de Hospitales</h2>
+		<h:form>
+
+			<div class="row">
+
+				<div class="col-sm-4">
+
+					<div class="form-group">
+
+						<h:outputLabel value="Ingrese el nombre del Hospital a buscar:"
+							for="name" styleClass="control-label" />
+						<p:inputText id="name"
+							value="#{hospitalController.h.nombreHospital}"
+							styleClass="form-control" />
+						<p:commandButton value="Buscar" update="lstHospitales"
+							actionListener="#{hospitalController.findByNameHospital()}" />
+
+					</div>
+				</div>
+			</div>
+
+			<p:dataTable id="lstHospitales" var="ho"
+				value="#{hospitalController.listaHospitales}" paginator="true"
+				paginatorPosition="top" rowsPerPageTemplate="5,10" rows="4"
+				emptyMessage="No existen registros de hospitales"
+				rowsIndexVar="item">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{ho.idHospital}" />
+				</p:column>
+
+				<p:column headerText="Hospital">
+					<h:outputText value="#{ho.nombreHospital}" />
+				</p:column>
+				
+				<p:column headerText="Medico">
+					<h:outputText value="#{ho.medico.fullnameMedico}" />
+				</p:column>
+
+				<p:column headerText="Direccion">
+					<h:outputText value="#{ho.direccionHospital}" />
+				</p:column>
+
+				<p:column headerText="Operación">
+					<h:commandLink action="listHospital" value="Eliminar"
+						actionListener="#{hospitalController.delete(ho)}" />
+				</p:column>
+
+				<p:column headerText="Modificar">
+					<h:commandLink action="#{hospitalController.preUpdate(ho)}"
+						value="Modificar" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

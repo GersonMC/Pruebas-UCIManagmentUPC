@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h3>Modificar esta reserva</h3>
+		<h:form>
+
+			<!-- PACIENTE -->
+			<h:outputLabel value="Paciente" for="RPaciente"
+				styleClass="control-label" />
+			<p:selectOneMenu id="RPaciente"
+				value="#{reservaController.r.paciente}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{reservaController.listaPacientes}" var="P"
+					itemLabel="#{P.fullnamePaciente}" itemValue="#{P}" />
+			</p:selectOneMenu>
+
+			<br />
+
+
+			<!-- HOSPITAL -->
+			<h:outputLabel value="Hospital" for="RHospital"
+				styleClass="control-label" />
+			<p:selectOneMenu id="RHospital"
+				value="#{reservaController.r.hospital}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{reservaController.listaHospitales}" var="H"
+					itemLabel="#{H.nombreHospital}" itemValue="#{H}" />
+			</p:selectOneMenu>
+
+			<br />
+
+
+			<!-- FECHA DE RESERVA -->
+			<h:outputLabel value="Fecha de reserva:" for="fReserva"
+				styleClass="control-Label" />
+			<p:calendar id="fecha" pattern="dd/MM/yyyy"
+				value="#{reservaController.r.fechaReserva}" showOn="button"
+				timZone="America/Mexico_City"></p:calendar>
+
+			<br />
+			
+			<!-- CAMBIAR LA RESERVA -->
+			<br />
+
+			<p:commandButton value="Actualizar"
+				actionListener="#{reservaController.update()}"
+				action="listReservas?faces-redirect=true" update="@form"
+				styleClass="btn btn-primary" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
